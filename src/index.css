@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: #D4AF37;
+  --color-primary-light: #F5D76E;
+  --color-primary-dark: #996515;
+  --color-background: #121212;
+  --color-background-light: #1E1E1E;
+  --color-background-dark: #0A0A0A;
+  --color-text: #F5F5F5;
+  --color-text-dark: #A0A0A0;
+  
+  /* Font families */
+  --font-sans: "Inter", system-ui, sans-serif;
+  
+  /* Breakpoints */
+  --breakpoint-tv: 1920px;
+}
+
+@layer base {
+  html, body {
+    @apply bg-background text-text;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* TV-specific optimizations */
+  @media (min-width: 1920px) {
+    html {
+      font-size: 20px; /* Larger base font size for TVs */
+    }
+  }
+
+  /* Make focus states visible for TV remote navigation */
+  :focus-visible {
+    @apply outline-primary outline-2 outline-offset-2;
+  }
+  
+  /* Hide scrollbar */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Disable select */
+  ::selection {
+    @apply bg-primary/30;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-all duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-light text-background-dark;
+  }
+  
+  .card {
+    @apply bg-background-light p-4 rounded-lg shadow-lg;
+  }
+  
+  .input {
+    @apply bg-background-light text-text border border-background-light focus:border-primary rounded-md px-4 py-2 outline-none w-full;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-fadeout {
+  animation: fadeOut 0.8s ease-out forwards;
+}
